@@ -1,0 +1,21 @@
+Bootstrap: docker
+From: alpine:3.13
+%post
+    DROPSEQ_VERSION="1.13"
+    set -x && \
+    apk update && \
+    apk add --no-cache --virtual .tmp1 git ca-certificates wget && \
+    apk add --no-cache bash openjdk11-jre-headless libc6-compat zlib-dev && \
+    ln -s /lib/libc.musl-x86_64.so.1 /lib/ld-linux-x86-64.so.2 && \
+    cd /tmp && \
+    wget https://github.com/broadinstitute/Drop-seq/releases/download/v${DROPSEQ_VERSION}/Drop-seq_tools-${DROPSEQ_VERSION}.zip && \
+    unzip Drop-seq_tools-${DROPSEQ_VERSION}.zip && \
+    mv Drop-seq_tools-${DROPSEQ_VERSION} Drop-seq_tools && \
+    mv Drop-seq_tools /opt/ && \
+    chmod -R 755 /opt/Drop-seq_tools && \
+    rm /tmp/Drop-seq_tools-${DROPSEQ_VERSION}.zip && \
+    apk del .tmp1
+%environment
+    export PATH=$PATH:/opt/Drop-seq_tools
+%runscript
+   /bin/bash

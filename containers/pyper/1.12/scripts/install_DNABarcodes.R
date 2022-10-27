@@ -1,0 +1,5 @@
+options(repos='https://cran.ism.ac.jp/')
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install()
+BiocManager::install('DNABarcodes')

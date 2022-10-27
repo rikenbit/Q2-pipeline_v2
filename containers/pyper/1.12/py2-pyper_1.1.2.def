@@ -1,0 +1,17 @@
+Bootstrap: docker
+From: rocker/r-ver:4.0.5
+%files
+        ./scripts /opt/
+%post
+        set -e
+        export DEBIAN_FRONTEND=noninteractive
+        apt update && apt upgrade -y
+        apt install -y apt-utils curl wget libcurl4-openssl-dev zlib1g-dev libxml2-dev bash 
+ 
+        sh /opt/scripts/install_py2.sh ;
+        Rscript /opt/scripts/install_DNABarcodes.R ;
+        
+        apt autoremove -y
+        apt clean
+        rm -rf /var/lib/apt/lists/
+	rm -rf /opt/scripts

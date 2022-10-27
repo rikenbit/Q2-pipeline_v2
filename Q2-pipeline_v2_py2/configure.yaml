@@ -1,0 +1,29 @@
+# Gridengin queue name
+QUEUE_NODE: 'all.q'
+# Number of core
+THREADNUM: '12'
+# job scheduler command
+RUN_CMD: 'qsub'
+# Container OPTION
+DOCKER_OPT: 'docker run --rm --init -u `id -u`:`id -g` -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -v $HOME:$HOME -w $PWD'
+
+# Container name
+BCL2FASTQ_IMG: 'myoshimura080822/bcl2fastq2:2.0'
+FASTQC_IMG: 'biocontainers/fastqc:v0.11.9_cv8'
+SEQTK_IMG: 'itpsc/seqtk:1.3'
+FASTXTOOLKIT_IMG: 'itpsc/fastx_toolkit:0.0.14'
+PICARD_IMG: 'itpsc/picard:2.25.2'
+DROPSEQ_IMG: 'itpsc/dropseq-tools:2.4.0'
+PYPER_IMG: 'itpsc/py2-pyper:1.1.2'
+STAR_IMG: 'itpsc/star:2.7.8a'
+
+# Reference file
+BCL_DIR: '/bcl_dir'
+SAMPLESHEET: 'SampleSheet.csv'
+REF_DIR: './reference/combined_mouse_Gencode_GRCm39_M27'
+SPECIES: 'mouse'
+CB_LENGTH: '15'
+# Cell Barcode length 14mer or 15mer
+BARCODE_FILE: 'CB_15mer_384_SetA.txt'
+TRIMSEQUENCE: 'GTATAGAATTCGCGGCCGCTCGCGAT'
+

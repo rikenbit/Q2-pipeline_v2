@@ -1,0 +1,22 @@
+
+# Gridengin queue name
+QUEUE_NODE: 'all.q'
+# Number of core
+THREADNUM: '12'
+# job scheduler command
+RUN_CMD: 'qsub'
+# Container OPTION
+DOCKER_OPT: 'docker run --rm --init -u 10014:10000 -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -v $HOME:$HOME -w $PWD'
+
+# Container name
+PICARD_IMG: 'itpsc/picard:2.25.2'
+STAR_IMG: 'itpsc/star:2.7.8a'
+
+SPECIES: 'mouse'
+
+INPUT_FASTA: "./GRCm39.primary_assembly.genome.fa"
+INPUT_GTF: "./gencode.vM27.primary_assembly.annotation.gtf"
+ERCC_FASTA: "./ERCC/ERCC.fa"
+ERCC_GTF: "./ERCC/ERCC.gtf"
+REF_DIR: "./combined_mouse_Gencode_GRCm39_M27"
+

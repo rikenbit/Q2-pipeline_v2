@@ -1,0 +1,33 @@
+Bootstrap: docker
+From: alpine:3.13
+%post
+    CORE="8"
+    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+
+    set -x &&  apk update
+    apk add --no-cache --virtual .tmp0 gcc zlib-dev g++ bzip2-dev xz-dev
+    apk add --no-cache --virtual .tmp1 wget make ncurses ca-certificates musl-dev libc-dev ncurses-dev curl-dev
+    update-ca-certificates
+
+    cd /tmp
+    wget https://github.com/agordon/fastx_toolkit/releases/download/0.0.14/fastx_toolkit-0.0.14.tar.bz2
+    wget https://github.com/agordon/libgtextutils/releases/download/0.7/libgtextutils-0.7.tar.gz
+    tar xf libgtextutils-0.7.tar.gz
+    tar xf fastx_toolkit-0.0.14.tar.bz2
+    cd libgtextutils-0.7
+    sed -i '47s/input_stream/static_cast<bool>(input_stream)/' src/gtextutils/text_line_reader.cpp
+    ./configure
+    make -j ${CORE}
+    make install
+    cd /tmp/fastx_toolkit-0.0.14
+    sed -i '106i \\t\t\texit(0);' src/fasta_formatter/fasta_formatter.cpp
+    ./configure
+    make -j ${CORE}
+    make install
+    cd /tmp
+    rm -rf *.gz *.zip *.bz2 bgtextutils-0.7 fastx_toolkit-0.0.14
+    apk del .tmp0
+    apk del .tmp1
+
+%environment
+     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH

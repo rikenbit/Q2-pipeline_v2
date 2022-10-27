@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: alpine:3.13
+%labels
+    Author Takumi Ichikawa<takumi.ichikawa@riken.jp>
+    Version v1.13
+%post
+    set -x
+    apk update
+    apk add bash zlib-dev
+    apk add --no-cache --virtual .tmp1 wget make gcc libc-dev
+    wget https://github.com/lh3/seqtk/archive/v1.3.tar.gz
+    tar xf v1.3.tar.gz
+    rm -rf v1.3.tar.gz
+    cd seqtk-1.3
+    make -j 8
+    mv seqtk /usr/local/bin/
+    cd ../
+    rm -rf seqtk-1.3
+    apk del .tmp1

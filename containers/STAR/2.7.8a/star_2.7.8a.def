@@ -1,0 +1,31 @@
+Bootstrap: docker
+From: ubuntu:20.04
+%post
+    STAR_version="2.7.8a"
+    HTSLIB_version="1.12"
+
+    apt update && apt upgrade -y
+    apt install -y wget build-essential gcc-multilib apt-utils zlib1g-dev g++ make libgomp1 automake libbz2-dev xz-utils liblzma-dev
+    apt clean
+
+    cd /tmp
+    wget https://github.com/samtools/htslib/releases/download/${HTSLIB_version}/htslib-${HTSLIB_version}.tar.bz2
+    tar xf htslib-${HTSLIB_version}.tar.bz2 && cd htslib-${HTSLIB_version}
+    autoheader && autoconf && ./configure && make && make install
+
+    cd /tmp
+    wget https://github.com/alexdobin/STAR/archive/${STAR_version}.tar.gz
+    tar xf ${STAR_version}.tar.gz
+    cd STAR-${STAR_version}/source
+        rm -rf htslib-1.10.2
+    make STAR
+    cp -p ./STAR /usr/local/bin/
+
+    cd /tmp
+    rm -rf /tmp/htslib-${HTSLIB_version}.tar.bz2 htslib-${HTSLIB_version} ${HTSLIB_version}.tar.gz STAR-${STAR_version}
+    apt remove -y wget build-essential gcc-multilib apt-utils zlib1g-dev g++ make automake
+    apt autoremove -y
+    apt clean
+    rm -rf /var/lib/apt/lists/
+%environment
+    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
