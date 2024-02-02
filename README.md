@@ -26,7 +26,7 @@ Install [Docker](https://docs.docker.com/engine/installation/) for full pipeline
 Clone from github.
 
 ```bash
-git clone rikenbit/Q2-pipeline_v2
+git clone https://github.com/rikenbit/Q2-pipeline_v2.git
 ```
 
 or download script with wget/curl and uncompress it.
