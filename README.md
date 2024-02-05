@@ -36,13 +36,13 @@ wget https://github.com/rikenbit/Q2-pipeline_v2/releases/download/v1.0/Q2-pipeli
 or
 curl -o https://github.com/rikenbit/Q2-pipeline_v2/releases/download/v1.0/Q2-pipeline_v1.0.tar.gz
 
-tar xf Q2-pipeline_v2_py2.tar.gz
+tar xf Q2-pipeline_v1.0.tar.gz
 ```
 
-Change directories to the following:Q2-pipeline_v2.
+Change directories to the following:Q2-pipeline_v1.0.
 
 ```
-cd Q2-pipeline_v2_py2
+cd Q2-pipeline_v2_py2 or Q2-pipeline_v2_py3
 ```
 
 #### Edit Permission
