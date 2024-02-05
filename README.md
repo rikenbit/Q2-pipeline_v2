@@ -32,9 +32,9 @@ git clone https://github.com/rikenbit/Q2-pipeline_v2.git
 or download script with wget/curl and uncompress it.
 
 ```
-wget https://github.com/rikenbit/Q2-pipeline_v2/releases/download/1.0/Q2-pipeline_v2_py2.tar.gz
+wget https://github.com/rikenbit/Q2-pipeline_v2/releases/download/v1.0/Q2-pipeline_v1.0.tar.gz
 or
-curl -o https://github.com/rikenbit/Q2-pipeline_v2/releases/download/1.0/Q2-pipeline_v2_py2.tar.gz
+curl -o https://github.com/rikenbit/Q2-pipeline_v2/releases/download/v1.0/Q2-pipeline_v1.0.tar.gz
 
 tar xf Q2-pipeline_v2_py2.tar.gz
 ```
